@@ -1,3 +1,4 @@
+// action exports to be used with reducer
 export const UPDATE_PRODUCTS = "UPDATE_PRODUCTS";
 
 export const ADD_TO_CART = "ADD_TO_CART";

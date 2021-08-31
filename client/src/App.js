@@ -6,9 +6,11 @@ import {
   ApolloProvider,
   createHttpLink,
 } from '@apollo/client';
+// context API
 import { setContext } from '@apollo/client/link/context';
-
+// imports the Provider component from the react-redux package. This allows any components nested within the Provider to have access to the Redux Store
 import { Provider } from 'react-redux';
+// imports the store file from path in ''. This allows all components nested within the provider to have access to global state
 import store from './utils/store';
 
 import Home from './pages/Home';
@@ -44,6 +46,7 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
         <div>
+          {/* store={store} links the imported store file to the Provider. This allows the passing of global state to nested components */}
           <Provider store={store}>
             <Nav />
             <Switch>

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useQuery } from '@apollo/client';
+// imports useDispatch and useSelector hooks from react-redux
 import { useDispatch, useSelector } from 'react-redux';
 import {
   UPDATE_CATEGORIES,
@@ -9,7 +10,9 @@ import { QUERY_CATEGORIES } from '../../utils/queries';
 import { idbPromise } from '../../utils/helpers';
 
 function CategoryMenu() {
+  // sets useDispatch hook to a variables
   const dispatch = useDispatch();
+  // sets useSelector hook to a variable and gives it access to state
   const state = useSelector((state) => state);
 
   const { categories } = state;
@@ -18,6 +21,7 @@ function CategoryMenu() {
 
   useEffect(() => {
     if (categoryData) {
+      // dispatches reducer for updating categories
       dispatch({
         type: UPDATE_CATEGORIES,
         categories: categoryData.categories,
@@ -36,6 +40,7 @@ function CategoryMenu() {
   }, [categoryData, loading, dispatch]);
 
   const handleClick = (id) => {
+    // dispatches reducer to update the current category being viewed when clicking on a category button
     dispatch({
       type: UPDATE_CURRENT_CATEGORY,
       currentCategory: id,

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import ProductItem from '../ProductItem';
+// imports useDispatch and useSelector hooks from react-redux
 import { useDispatch, useSelector } from 'react-redux';
 import { UPDATE_PRODUCTS } from '../../utils/actions';
 import { useQuery } from '@apollo/client';
@@ -8,7 +9,9 @@ import { idbPromise } from '../../utils/helpers';
 import spinner from '../../assets/spinner.gif';
 
 function ProductList() {
+  // sets useDispatch hook to a variable
   const dispatch = useDispatch();
+  // sets useSelector hook to a variable and gives it access to state
   const state = useSelector((state) => state);
 
   const { currentCategory } = state;
@@ -17,6 +20,7 @@ function ProductList() {
 
   useEffect(() => {
     if (data) {
+      // dispatches update products reducer
       dispatch({
         type: UPDATE_PRODUCTS,
         products: data.products,
@@ -26,6 +30,7 @@ function ProductList() {
       });
     } else if (!loading) {
       idbPromise('products', 'get').then((products) => {
+        // dispatches update products reducer for indexeddb
         dispatch({
           type: UPDATE_PRODUCTS,
           products: products,

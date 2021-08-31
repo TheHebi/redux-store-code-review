@@ -1,3 +1,4 @@
+// imports all actions from actions.js
 import {
   UPDATE_PRODUCTS,
   ADD_TO_CART,
@@ -9,7 +10,7 @@ import {
   CLEAR_CART,
   TOGGLE_CART
 } from "./actions";
-
+// creates the initialState to be used with the reducers
 const initialState = {
   products: [],
   categories: [],
@@ -17,7 +18,7 @@ const initialState = {
   cart: [],
   cartOpen: false
 };
-
+// exports reducers function using state, and actions as arguments
 export const reducers = (state = initialState, action) => {
   switch (action.type) {
     case UPDATE_PRODUCTS:

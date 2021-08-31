@@ -5,6 +5,7 @@ import { QUERY_CHECKOUT } from '../../utils/queries';
 import { idbPromise } from '../../utils/helpers';
 import CartItem from '../CartItem';
 import Auth from '../../utils/auth';
+// imports useDispatch and useSelector hooks from react-redux
 import { useDispatch, useSelector } from 'react-redux';
 import { TOGGLE_CART, ADD_MULTIPLE_TO_CART } from '../../utils/actions';
 import './style.css';
@@ -12,7 +13,9 @@ import './style.css';
 const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
 
 const Cart = () => {
+  // hook to use reducer
   const dispatch = useDispatch();
+  // hook to read global state from the redux store
   const state = useSelector((state) => state);
   const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT);
 
@@ -27,6 +30,7 @@ const Cart = () => {
   useEffect(() => {
     async function getCart() {
       const cart = await idbPromise('cart', 'get');
+      // reducer to add items to cart
       dispatch({ type: ADD_MULTIPLE_TO_CART, products: [...cart] });
     }
 
@@ -36,6 +40,7 @@ const Cart = () => {
   }, [state.cart.length, dispatch]);
 
   function toggleCart() {
+    // reducer to toggle cart visibility
     dispatch({ type: TOGGLE_CART });
   }
 
@@ -63,6 +68,7 @@ const Cart = () => {
 
   if (!state.cartOpen) {
     return (
+      // toggle cart reducer runs on click
       <div className="cart-closed" onClick={toggleCart}>
         <span role="img" aria-label="trash">
           🛒
@@ -73,6 +79,7 @@ const Cart = () => {
 
   return (
     <div className="cart">
+      {/* toggle cart reducer runs on click */}
       <div className="close" onClick={toggleCart}>
         [close]
       </div>
